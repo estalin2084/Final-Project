@@ -158,7 +158,7 @@ while not data:
     c.phoneNumber = input("Please enter customer's phone number: ")  # this input takes the customer's phone number
     c.passport = input("Please enter your passport number: ")
 
-    for key in vars(c):  # this for iterates the while dictionary and evaluates that all the fields are filled.
+    for key in vars(c):  # this for iterates the while in the Class and evaluates that all the fields are filled.
         if vars(c)[key] == "":
             print("All fields are mandatory!")
             break
@@ -169,10 +169,10 @@ print("Thank your for your information! ")
 print("")
 print("These are our destinations: ")
 print("")
-for x in range(len(destination_list)):
+for x in range(len(destination_list)): #display the destination cities to the customer
     print("{} - {:>2s} - {:2>}".format(x + 1, destination_list[x].city_name, destination_list[x].price))
 print("")
-while True:
+while True:#input checker for the destionation city
     try:
         chosen_city = int(input("Which city would you like to travel?:  "))
     except:
@@ -185,10 +185,11 @@ while True:
 
 dep_time = input("What is your preferred time to travel?: Select M for Morning, A for Afternoon, N for Night: ")
 print("")
-while dep_time.upper() not in hours:
+while dep_time.upper() not in hours:#Input checker for the time of the day
     dep_time = input("Only Select M for Morning, A for Afternoon, N for Night: ")
     
 print("")
+#Selection for the preferred time of the day to travel
 if dep_time.upper() == "M":
     for item in range(len(morning_hours)):
         print("{} - {:>2s} ".format(item + 1, morning_hours[item]))
@@ -207,12 +208,13 @@ elif dep_time.upper() == "N":
 
 print("")
 
-cart = shopping_cart(0,0)
+cart = shopping_cart(0,0) #Instancing Shoping cart Class
 cart.price = destination_list[chosen_city - 1].price
 cart.tax = 1.13
-loyalty_tier(cart)
+loyalty_tier(cart) # instancing function Loyalty tier
 cart.total
 
+#Instancing variables from the Class Customer to print the customer's information
 name = c.first_name
 last = c.last_name
 passport = c.passport
@@ -225,11 +227,12 @@ print("The price of your flight is {:.2f} CAD - Taxes included".format(cart.get_
 print("")
 print("How would you like to pay? ")
 print("")
+#Displays the list of payment options
 for x in range(len(payment_list)):
     print("{} {}".format(x + 1, payment_list[x]))
 print("")
 
-while True:
+while True:#Input checker for the payment
     try:
 
         received_payment = int(input("Please choose your payment method: "))
@@ -241,9 +244,9 @@ while True:
         else:
             break
 
-pay = payment_list[received_payment -1]
-ticket_id =  '-'.join(random.choices(string.digits, k=8))
-flight_n = '-'.join(random.choices(string.digits, k=4))
+pay = payment_list[received_payment -1] #variable to store the payment received
+ticket_id =  '-'.join(random.choices(string.digits, k=8)) #Ticket generator
+flight_n = '-'.join(random.choices(string.digits, k=4)) #Flight number generator
 print("")
 print("Your payment was received via", "{}".format(pay))
 print("")
@@ -254,6 +257,18 @@ print("Your flight number is: {}".format(flight_n))
 print("Eticket code: {}\nDeparture City - {} - Gate B\nArriving City - {} - City Code - {} \nDeparture Time: {}\nArriving Gate: A".format(ticket_id, departure_city, destination_list[chosen_city - 1].city_name, destination_list[chosen_city - 1].city_code, selection))
 print ("Your estimated flight time is: {} ".format(flight_time[chosen_city]["Time"]))
 
+openfile =open(r"C:\Users\Estalin Pena\Desktop\Programming-_Tasks\Final-Project\TravelInfo.txt", "w")
+
+openfile.write("")
+openfile.write("\nYour payment was received via" + "{}".format(pay))
+openfile.write("")
+openfile.write("\nThank you for flying with us, this is your flight information: ")
+openfile.write("-" * 80)
+openfile.write("\nTraveler's Information: {} {} \nPhone: {} \nPassport: {}".format(name,last,phone, passport))
+openfile.write("\nYour flight number is: {}".format(flight_n))
+openfile.write("\nEticket code: {}\nDeparture City - {} - Gate B\nArriving City - {} - City Code - {} \nDeparture Time: {}\nArriving Gate: A".format(ticket_id, departure_city, destination_list[chosen_city - 1].city_name, destination_list[chosen_city - 1].city_code, selection))
+openfile.write ("Your estimated flight time is: {} ".format(flight_time[chosen_city]["Time"]))
+openfile.close()
 
 
 
