@@ -46,7 +46,11 @@ class shopping_cart():
         self.total = 0
 
     def calculate_total(self, discount):
+        self.discount = discount
         self.total = self.price * discount
+        return self.total
+
+
 
     def get_total_price(self):
         return self.price * 1.13
@@ -220,10 +224,13 @@ last = c.last_name
 passport = c.passport
 phone = c.phoneNumber
 
+
 print("")
 print("Your flight is from {} to {} at {}".format(departure_city, destination_list[chosen_city - 1].city_name, selection))
 print("")
-print("The price of your flight is {:.2f} CAD - Taxes included".format(cart.get_total_price()))
+print("Your discount for your Loyalty Plan is: {} CAD".format(cart.total))
+print("")
+print("The price of your flight is {:.2f} CAD - Taxes included".format(cart.get_total_price() - cart.total))
 print("")
 print("How would you like to pay? ")
 print("")
@@ -248,7 +255,7 @@ pay = payment_list[received_payment -1] #variable to store the payment received
 ticket_id =  '-'.join(random.choices(string.digits, k=8)) #Ticket generator
 flight_n = '-'.join(random.choices(string.digits, k=4)) #Flight number generator
 print("")
-print("Your payment was received via", "{}".format(pay))
+print("Your payment was received via {}".format(pay))
 print("")
 print("Thank you for flying with us, this is your flight information: ")
 print("-" * 80)
@@ -260,7 +267,7 @@ print ("Your estimated flight time is: {} ".format(flight_time[chosen_city]["Tim
 openfile =open(r"C:\Users\Estalin Pena\Desktop\Programming-_Tasks\Final-Project\TravelInfo.txt", "w")
 
 openfile.write("")
-openfile.write("\nYour payment was received via" + "{}".format(pay))
+openfile.write("\nYour payment was received via {}".format(pay))
 openfile.write("")
 openfile.write("\nThank you for flying with us, this is your flight information: ")
 openfile.write("-" * 80)

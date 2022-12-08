@@ -1,12 +1,12 @@
 
-Your payment was received viaDebit
+Your payment was received viaCredit
 Thank you for flying with us, this is your flight information: --------------------------------------------------------------------------------
-Traveler's Information: Rafael PEna 
-Phone: 8093831366 
-Passport: RD6562325
-Your flight number is: 9-3-7-2
-Eticket code: 0-0-5-6-4-4-9-8
+Traveler's Information: Estalin  Pena 
+Phone: 2268982744 
+Passport: RD451235
+Your flight number is: 3-3-2-9
+Eticket code: 8-2-7-8-1-9-5-6
 Departure City - Winnipeg - Gate B
-Arriving City - Vancouver - City Code - VAN 
-Departure Time: 8:00 P.M.
-Arriving Gate: AYour estimated flight time is: 3 h 05 min 
+Arriving City - Toronto - City Code - TOR 
+Departure Time: 8:00 A.M.
+Arriving Gate: AYour estimated flight time is: 2 h 35 min 
