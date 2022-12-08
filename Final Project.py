@@ -55,17 +55,20 @@ class shopping_cart():
 def loyalty_tier(car):
    while True:
         discount = input("Do you have a loyalty plan [Yes/No]: ")
+        print("")
         while discount.upper() != "YES" and discount.upper() != "Y" and discount.upper() != "NO" and discount.upper() != "N":
             discount = input("Do you have a loyalty plan [Yes/No]: ")
         if discount.upper() == "YES" or discount.upper() == "Y":
             discount = True  
             for x in loyalty.keys():
-                print("{} - {} - {}".format(x, loyalty[x]["Name"], loyalty[x]["Percentage"]))     
+                print("{} - {} - {}".format(x, loyalty[x]["Name"], loyalty[x]["Percentage"]))
+            print("")
             chosen_loyalty = input("Please indicate your loyalty plan: ")
             while chosen_loyalty not in loyalty:
                 chosen_loyalty = input("Please choose a number between 1 and 4: ")
                 continue
             selection = loyalty[chosen_loyalty]["Percentage"]
+            print("")
             print("Your discount is " "{}" "{}".format("", selection))
             car.calculate_total(loyalty[chosen_loyalty]["Value"])
             break
@@ -108,6 +111,7 @@ class Customer(object):
         self.last_name = ''
         self.address = ''
         self.phoneNumber = ''
+        self.passport = ''
         self.city = ''
         self.province = ''
         self.postalCode = ''
@@ -133,7 +137,7 @@ morning_hours = ["8:00 A.M.", "9:00 A.M.", "10:00 A.M."]
 afternoon_hours = ["2:00 P.M.", "3:00 P.M.", "4:00 P.M."]
 night_hours = ["8:00 P.M.", "9:00 P.M.", "10:00 P.M."]
 
-print("Welcome to EP Travel Agency! ")
+print("{:>40}Welcome to EP Travel Agency! ".format(""))
 print("")
 print("")
 #The only departure city
@@ -152,6 +156,7 @@ while not data:
     c.province = input("Please enter customer's province: ")  # this input takes the customer's province
     c.postalCode = input("Please enter customer's postal code: ")  # this input takes the customer's postal code
     c.phoneNumber = input("Please enter customer's phone number: ")  # this input takes the customer's phone number
+    c.passport = input("Please enter your passport number: ")
 
     for key in vars(c):  # this for iterates the while dictionary and evaluates that all the fields are filled.
         if vars(c)[key] == "":
@@ -162,7 +167,8 @@ while not data:
 print("")
 print("Thank your for your information! ")
 print("")
-
+print("These are our destinations: ")
+print("")
 for x in range(len(destination_list)):
     print("{} - {:>2s} - {:2>}".format(x + 1, destination_list[x].city_name, destination_list[x].price))
 print("")
@@ -176,8 +182,9 @@ while True:
             continue
         else:
             break
-print("")
+
 dep_time = input("What is your preferred time to travel?: Select M for Morning, A for Afternoon, N for Night: ")
+print("")
 while dep_time.upper() not in hours:
     dep_time = input("Only Select M for Morning, A for Afternoon, N for Night: ")
     
@@ -185,23 +192,35 @@ print("")
 if dep_time.upper() == "M":
     for item in range(len(morning_hours)):
         print("{} - {:>2s} ".format(item + 1, morning_hours[item]))
+    print("")
     selection = morning_hours[chosenHours() - 1]
 elif dep_time.upper() == "A":
     for item in range(len(afternoon_hours)):
         print("{} - {:>2s} ".format(item + 1, afternoon_hours[item]))
+    print("")
     selection = afternoon_hours[chosenHours() - 1]
 elif dep_time.upper() == "N":
     for item in range(len(night_hours)):
         print("{} - {:>2s} ".format(item + 1, night_hours[item]))
+    print("")
     selection = night_hours[chosenHours() - 1]
+
+print("")
 
 cart = shopping_cart(0,0)
 cart.price = destination_list[chosen_city - 1].price
 cart.tax = 1.13
 loyalty_tier(cart)
 cart.total
+
+name = c.first_name
+last = c.last_name
+passport = c.passport
+phone = c.phoneNumber
+
 print("")
 print("Your flight is from {} to {} at {}".format(departure_city, destination_list[chosen_city - 1].city_name, selection))
+print("")
 print("The price of your flight is {:.2f} CAD - Taxes included".format(cart.get_total_price()))
 print("")
 print("How would you like to pay? ")
@@ -228,11 +247,12 @@ flight_n = '-'.join(random.choices(string.digits, k=4))
 print("")
 print("Your payment was received via", "{}".format(pay))
 print("")
-print("Thank you for flying with us this is your flight information: ")
+print("Thank you for flying with us, this is your flight information: ")
 print("-" * 80)
-print("Your flight number is {}".format(flight_n))
-print("Eticket code: {}\nDeparture City - {} - Gate B\nArriving Crity {} City Code {} \nDeparture Time {}\nArriving Gate A".format(ticket_id, departure_city, destination_list[chosen_city - 1].city_name, destination_list[chosen_city - 1].city_code, selection))
-print ("Your estimated flight time is {} ".format(flight_time[chosen_city]["Time"]))
+print("Traveler's Information: {} {} \nPhone: {} \nPassport: {}".format(name,last,phone, passport))
+print("Your flight number is: {}".format(flight_n))
+print("Eticket code: {}\nDeparture City - {} - Gate B\nArriving City - {} - City Code - {} \nDeparture Time: {}\nArriving Gate: A".format(ticket_id, departure_city, destination_list[chosen_city - 1].city_name, destination_list[chosen_city - 1].city_code, selection))
+print ("Your estimated flight time is: {} ".format(flight_time[chosen_city]["Time"]))
 
 
 
